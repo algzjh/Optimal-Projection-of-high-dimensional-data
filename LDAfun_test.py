@@ -115,6 +115,12 @@ if __name__ == "__main__":
 
     print("line: \n", discriminating_vectors[0][0], discriminating_vectors[0][1])
     x = np.linspace(mix, max)
-    k = discriminating_vectors[0][1] / discriminating_vectors[0][0]
-    plt.plot(x, k*x,  color='r')
+    k1 = discriminating_vectors[0][1] / discriminating_vectors[0][0]
+    plt.plot(x, k1*x,  color='r')
+    k2 = discriminating_vectors[1][1] / discriminating_vectors[1][0]
+    plt.plot(x, k2*x, color='y')
     plt.show()
+    """
+    because Sw^-1*Sb is not a symmetric matrix, so the eigenvectors are not necessarily orthogonal
+    由于Sw-1Sb不一定是对称阵，因此得到的k个特征向量不一定正交，
+    """
