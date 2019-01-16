@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 
 def lda(c0, c1):
     """
@@ -112,6 +113,14 @@ if __name__ == "__main__":
 
     discriminating_vectors = lda(c0, c1)
     print("discriminating_vectors: \n", discriminating_vectors)
+
+    # Comparing with the lda in sklearn
+    tc = np.concatenate((c0, c1))
+    label = np.array([0 for i in range(200)] + [1 for i in range(200)])
+    lda = LDA(solver='eigen')
+    clf = lda.fit(tc, label)
+    print("scalings: \n", clf.scalings_)
+
 
     print("line: \n", discriminating_vectors[0][0], discriminating_vectors[0][1])
     x = np.linspace(mix, max)
