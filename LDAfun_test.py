@@ -14,7 +14,7 @@ def lda(c0, c1):
     overall_mean = np.mean(c, axis=0)
     print("overall_mean: ", overall_mean)
     num0 = c0.shape[0]  # the number of class-0
-    num1 = c1.shape[1]  # the number of class-1
+    num1 = c1.shape[0]  # the number of class-1
 
     # Computing the mean vectors
     mean0_vectors = np.mean(c0, axis=0)
