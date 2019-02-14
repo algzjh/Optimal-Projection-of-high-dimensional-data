@@ -1,17 +1,20 @@
 import numpy as np
-from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 
+
 def lda(c0, c1):
     """
+    type is ndarray
+    shape like (200,2) and 200 is the number of samples and 2 is the number of features
     pass two class data to the function
     return the optimal projection direction using LDA
+    the solve method is Eigenvalue Decomposition
     """
     # get the basic information
     dim = c0.shape[1]  # the dim is the number of features, for instance, the dim of iris is 4
     c = np.concatenate((c0, c1))  # Vertical stacking, default axis is 0
-    overall_mean = np.mean(c, axis=0)
+    overall_mean = np.mean(c, axis=0)  # the overall_mean of the samples
     print("overall_mean: ", overall_mean)
     num0 = c0.shape[0]  # the number of class-0
     num1 = c1.shape[0]  # the number of class-1
@@ -35,7 +38,7 @@ def lda(c0, c1):
         class0_sc_mat += (row-mv).dot((row-mv).T)
         # print("class0_sc_mat: ", class0_sc_mat)
     S_W += class0_sc_mat
-    print("within-class Scatter Matrix: \n", S_W)
+    # print("within-class Scatter Matrix: \n", S_W)
 
     class1_sc_mat = np.zeros((dim, dim))
     mv = mean1_vectors.reshape((dim, 1))
@@ -121,15 +124,14 @@ if __name__ == "__main__":
     clf = lda.fit(tc, label)
     print("scalings: \n", clf.scalings_)
 
-
-    print("line: \n", discriminating_vectors[0][0], discriminating_vectors[0][1])
+    # print("line: \n", discriminating_vectors[0][0], discriminating_vectors[0][1])
     x = np.linspace(mix, max)
     k1 = discriminating_vectors[0][1] / discriminating_vectors[0][0]
-    plt.plot(x, k1*x,  color='r')
+    plt.plot(x, k1*x, color='r')
     k2 = discriminating_vectors[1][1] / discriminating_vectors[1][0]
     plt.plot(x, k2*x, color='y')
     plt.show()
     """
     because Sw^-1*Sb is not a symmetric matrix, so the eigenvectors are not necessarily orthogonal
-    由于Sw-1Sb不一定是对称阵，因此得到的k个特征向量不一定正交，
+    由于Sw-1Sb不一定是对称阵，因此得到的k个特征向量不一定正交
     """
