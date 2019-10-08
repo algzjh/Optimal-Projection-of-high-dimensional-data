@@ -1,0 +1,108 @@
+
+#container{
+    margin:10px auto;
+    font-family: "Helvetica";
+    /*Helvetica, Arial, sans-serif;*/
+    font-size:18px;
+    background-color:white;
+    border:1px solid black;
+    width:1430px;
+    /* width:1930px; */
+    height:670px;
+}
+/*一些基本的信息*/
+#infoBody{
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color:white;
+    border:1px solid black;
+    float:left;
+    width:230px;
+    height:650px;
+}
+/*主视图*/
+#mainBody{
+    float:left;
+    width:1150px;
+    /* width:1500px; */
+    height:650px;
+    background-color:white;
+    border:1px solid black;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+
+#viewBody{
+    background-color: #FFFFFF;
+    float:left;
+    width:1145px;
+    /* width:1480px; */
+    height:540px;
+    outline: none;
+}
+
+#viewTitle{
+    /*background-color:#2C3E50 ;*/
+    width:1620px;
+    height:30px;
+    text-align:center
+}
+.plots{
+    float:left;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color:#FFFFFF ;
+    width:210px;
+    /* width:320px; */
+    height:210px;
+    border: 2px solid gray;
+}
+
+.metricplots{
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: #FFFFFF;
+    width: 1090px;
+    height:140px;
+    border: 2px solid gray;
+}
+
+.metricchart{
+    float: left;
+    margin-left: 10px;
+    margin-top: 0px;
+    background-color: #FFFFFF;
+    width: 1000px;
+    height:85px;
+    border: 0px solid gray;
+}
+
+.MyText{
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.axis path,
+.axis line{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+
+.axis path,
+.axis line{
+    fill : none;
+    stroke : black ;
+    shape-rendering : crispEdges;
+}
+.axis text{
+    font-family:Sans-Serif;
+    font-size: 11px;
+}

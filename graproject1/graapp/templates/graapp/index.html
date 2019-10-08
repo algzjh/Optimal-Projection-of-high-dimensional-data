@@ -1,0 +1,341 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> Perception-Driven LDA</title>
+
+	{% load staticfiles %}
+	<script> token= '{{ csrf_token }}';</script>
+
+    <link rel="stylesheet" type="text/css" href="{%static 'css/home.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/flat-ui.min.css'%}">
+
+	<script src = "{%static 'lib/jquery-2.2.1.min.js' %}"></script>
+	<script src = "{%static 'lib/d3.min.js' %}"></script>
+
+	<script src = "{%static 'js/Variable.js' %}"></script>
+	<script src = "{%static 'js/dataLoad.js' %}"></script>
+
+	<script src = "{%static 'js/dataDeal.js' %}"></script>
+	<script src = "{%static 'js/drawReduce.js' %}"></script>
+
+</head>
+<body>
+	<div id="container">
+
+        <div id="infoBody">
+            <p style="position:relative;left:10px;top:10px;font-family: 'Helvetica Neue';color:black;font-weight: bold;">
+                    信息栏
+            </p>
+            <div>
+                <p style="position:relative;left:30px;top:10px">
+                    Dataset
+                </p>
+                 <select class = "form-control " id = "selectData" onchange = "onFileSelected()"
+                        style = "position: relative;padding-top: 2px;padding-left: 2px;padding-bottom: 1px ;
+                                width:180px;height:25px; left:30px;top:0px; " >
+                    <option value=""></option>
+                    <!-- before dataset
+                    <option value="../../static/data/iris.csv">iris</option>
+                    <option value="../../static/data/wine.csv">wine</option>
+                    <option value="../../static/data/out_boston_origClassLabels.csv">out_boston_origClassLabels</option>
+                    <option value="../../static/data/bbdm13_origClassLabels.csv">bbdm13_origClassLabels</option>
+                    <option value="../../static/data/ms_interleaved_40_80_3d_0.csv">ms_interleaved_40_80_3d_0</option>
+                    <option value="../../static/data/out_ForestTypes.csv">out_ForestTypes</option>
+                    <option value="../../static/data/minist.csv">minist</option>
+                    <option value="../../static/data/minist0_4.csv">minist0_4</option>
+                    <option value="../../static/data/minist0_3.csv">minist0_3</option>
+                    <option value="../../static/data/balance-scale.csv">balance-scale</option>
+                    <option value="../../static/data/cars03Cropped_d1_origClassLabels.csv">cars03Cropped_d1_origClassLabels</option>
+                    <option value="../../static/data/zoo.csv">zoo</option>
+                    <option value="../../static/data/breast_cancer.csv">breast_cancer</option>
+                    -->
+                    <option value='../../static/data/efashion_origClassLabels.csv'>efashion_origClassLabels</option>
+                    <option value='../../static/data/interleaved_100_200_10d_0_notcramped_notrotated.csv'>interleaved_100_200_10d_0_notcramped_notrotated</option>
+                    <option value='../../static/data/n500-d10-c5-spr0.1-out0.csv'>n500-d10-c5-spr0.1-out0</option>
+                    <option value='../../static/data/interleaved_100_200_4d_25_cramped_rotated.csv'>interleaved_100_200_4d_25_cramped_rotated</option>
+                    <option value='../../static/data/ms_interleaved_400_800_3d_50.csv'>ms_interleaved_400_800_3d_50</option>
+                    <option value='../../static/data/n100-d10-c3-spr0.1-out0.csv'>n100-d10-c3-spr0.1-out0</option>
+                    <option value='../../static/data/interleaved_100_200_5d_0_notcramped_notrotated.csv'>interleaved_100_200_5d_0_notcramped_notrotated</option>
+                    <option value='../../static/data/ms_interleaved_120_240_3d_25_centeredClusters.csv'>ms_interleaved_120_240_3d_25_centeredClusters</option>
+                    <option value='../../static/data/soybean.csv'>soybean</option>
+                    <option value='../../static/data/n500-d5-c5-spr0.1-out0.csv'>n500-d5-c5-spr0.1-out0</option>
+                    <option value='../../static/data/cmc.csv'>cmc</option>
+                    <option value='../../static/data/scene.csv'>scene</option>
+                    <option value='../../static/data/Connectionist_Bench_Vowel Recognition_Deterding_Data.csv'>Connectionist_Bench_Vowel Recognition_Deterding_Data</option>
+                    <option value='../../static/data/ForestTypes.csv'>ForestTypes</option>
+                    <option value='../../static/data/n100-d5-c5-spr0.1-out0.csv'>n100-d5-c5-spr0.1-out0</option>
+                    <option value='../../static/data/wine_origClassLabels.csv'>wine_origClassLabels</option>
+                    <option value='../../static/data/ms_interleaved_60_120_3d_0_centeredClusters.csv'>ms_interleaved_60_120_3d_0_centeredClusters</option>
+                    <option value='../../static/data/JavierGeneratedData_3dinterleaved_3classes_origClassLabels.csv'>JavierGeneratedData_3dinterleaved_3classes_origClassLabels</option>
+                    <option value='../../static/data/world_9d.csv'>world_9d</option>
+                    <option value='../../static/data/cereal_origClassLabels.csv'>cereal_origClassLabels</option>
+                    <option value='../../static/data/page-blocks.csv'>page-blocks</option>
+                    <option value='../../static/data/olive.csv'>olive</option>
+                    <option value='../../static/data/ms_interleaved_40_80_3d_50.csv'>ms_interleaved_40_80_3d_50</option>
+                    <option value='../../static/data/n100-d10-c5-spr0.2-out0.csv'>n100-d10-c5-spr0.2-out0</option>
+                    <option value='../../static/data/parkinsons_abs_croped.csv'>parkinsons_abs_croped</option>
+                    <option value='../../static/data/n100-d5-c3-spr0.2-out0.csv'>n100-d5-c3-spr0.2-out0</option>
+                    <option value='../../static/data/abalone_origClassLabels.csv'>abalone_origClassLabels</option>
+                    <option value='../../static/data/world_11d.csv'>world_11d</option>
+                    <option value='../../static/data/n500-d5-c3-spr0.2-out0.csv'>n500-d5-c3-spr0.2-out0</option>
+                    <option value='../../static/data/digits5_8.csv'>digits5_8</option>
+                    <option value='../../static/data/balance-scale.csv'>balance-scale</option>
+                    <option value='../../static/data/dermatology.csv'>dermatology</option>
+                    <option value='../../static/data/worldmap_origClassLabels.csv'>worldmap_origClassLabels</option>
+                    <option value='../../static/data/interleaved_100_200_5d_25_cramped_rotated.csv'>interleaved_100_200_5d_25_cramped_rotated</option>
+                    <option value='../../static/data/spambase.csv'>spambase</option>
+                    <option value='../../static/data/ms_interleaved_60_120_3d_50_centeredClusters.csv'>ms_interleaved_60_120_3d_50_centeredClusters</option>
+                    <option value='../../static/data/cars03Cropped_d3_origClassLabels.csv'>cars03Cropped_d3_origClassLabels</option>
+                    <option value='../../static/data/test___interleaved_100_200_10d_0_notcramped_notrotated.csv'>test___interleaved_100_200_10d_0_notcramped_notrotated</option>
+                    <option value='../../static/data/n500-d10-c3-spr0.2-out0.csv'>n500-d10-c3-spr0.2-out0</option>
+                    <option value='../../static/data/shuttle_big.csv'>shuttle_big</option>
+                    <option value='../../static/data/Hill_Valley_with_noise_Testing.csv'>Hill_Valley_with_noise_Testing</option>
+                    <option value='../../static/data/fisheries_clusteredByEscapementTarget.csv'>fisheries_clusteredByEscapementTarget</option>
+                    <option value='../../static/data/interleaved_100_200_4d_0_notcramped_notrotated.csv'>interleaved_100_200_4d_0_notcramped_notrotated</option>
+                    <option value='../../static/data/UnEvenDensity-noName_origClassLabels.csv'>UnEvenDensity-noName_origClassLabels</option>
+                    <option value='../../static/data/shuttle_small_origClassLabels.csv'>shuttle_small_origClassLabels</option>
+                    <option value='../../static/data/n100-d10-c5-spr0.1-out0.csv'>n100-d10-c5-spr0.1-out0</option>
+                    <option value='../../static/data/JavierGeneratedData_3dinterleaved_4classes_origClassLabels.csv'>JavierGeneratedData_3dinterleaved_4classes_origClassLabels</option>
+                    <option value='../../static/data/bbdm13_origClassLabels.csv'>bbdm13_origClassLabels</option>
+                    <option value='../../static/data/boston_origClassLabels.csv'>boston_origClassLabels</option>
+                    <option value='../../static/data/tse300.csv'>tse300</option>
+                    <option value='../../static/data/n500-d5-c3-spr0.1-out0.csv'>n500-d5-c3-spr0.1-out0</option>
+                    <option value='../../static/data/combined_scale.csv'>combined_scale</option>
+                    <option value='../../static/data/processed.cleveland.csv'>processed.cleveland</option>
+                    <option value='../../static/data/interleaved_100_200_15d_0_notcramped_notrotated.csv'>interleaved_100_200_15d_0_notcramped_notrotated</option>
+                    <option value='../../static/data/italianwines.csv'>italianwines</option>
+                    <option value='../../static/data/iris.csv'>iris</option>
+                    <option value='../../static/data/n100-d5-c3-spr0.1-out0.csv'>n100-d5-c3-spr0.1-out0</option>
+                    <option value='../../static/data/n500-d10-c3-spr0.1-out0.csv'>n500-d10-c3-spr0.1-out0</option>
+                    <option value='../../static/data/twosquare-noName_origClassLabels.csv'>twosquare-noName_origClassLabels</option>
+                    <option value='../../static/data/ionosphere_origClassLabels.csv'>ionosphere_origClassLabels</option>
+                    <option value='../../static/data/zoo.csv'>zoo</option>
+                    <option value='../../static/data/ecoliproteins.csv'>ecoliproteins</option>
+                    <option value='../../static/data/Statlog_Image_Segmentation.csv'>Statlog_Image_Segmentation</option>
+                    <option value='../../static/data/ms_interleaved_60_120_3d_25_centeredClusters.csv'>ms_interleaved_60_120_3d_25_centeredClusters</option>
+                    <option value='../../static/data/ms_interleaved_400_800_3d_0.csv'>ms_interleaved_400_800_3d_0</option>
+                    <option value='../../static/data/musicnetgroups.csv'>musicnetgroups</option>
+                    <option value='../../static/data/interleaved_100_200_10d_25_cramped_rotated.csv'>interleaved_100_200_10d_25_cramped_rotated</option>
+                    <option value='../../static/data/waveform.csv'>waveform</option>
+                    <option value='../../static/data/seeds.csv'>seeds</option>
+                    <option value='../../static/data/ms_interleaved_40_80_3d_0.csv'>ms_interleaved_40_80_3d_0</option>
+                    <option value='../../static/data/hiv.csv'>hiv</option>
+                    <option value='../../static/data/interleaved_100_200_6d_0_notcramped_notrotated.csv'>interleaved_100_200_6d_0_notcramped_notrotated</option>
+                    <option value='../../static/data/pima-indians-diabetes.csv'>pima-indians-diabetes</option>
+                    <option value='../../static/data/breast-cancer-wisconsin_origClassLabels.csv'>breast-cancer-wisconsin_origClassLabels</option>
+                    <option value='../../static/data/cars03Cropped_d1_origClassLabels.csv'>cars03Cropped_d1_origClassLabels</option>
+                    <option value='../../static/data/hayes-roth.csv'>hayes-roth</option>
+                    <option value='../../static/data/interleaved_100_500_3_25_cramped_rotated.csv'>interleaved_100_500_3_25_cramped_rotated</option>
+                    <option value='../../static/data/n500-d10-c5-spr0.2-out0.csv'>n500-d10-c5-spr0.2-out0</option>
+                    <option value='../../static/data/fisheries_clusteredByHarvestRule.csv'>fisheries_clusteredByHarvestRule</option>
+                    <option value='../../static/data/lenses.csv'>lenses</option>
+                    <option value='../../static/data/interleaved_100_200_6d_25_cramped_rotated.csv'>interleaved_100_200_6d_25_cramped_rotated</option>
+                    <option value='../../static/data/JavierGeneratedData_3dinterleaved_5classes_origClassLabels.csv'>JavierGeneratedData_3dinterleaved_5classes_origClassLabels</option>
+                    <option value='../../static/data/yeast_origClassLabels.csv'>yeast_origClassLabels</option>
+                    <option value='../../static/data/interleaved_250_500_3_0_notCramped_rotated.csv'>interleaved_250_500_3_0_notCramped_rotated</option>
+                    <option value='../../static/data/interleaved_100_200_15d_25_cramped_rotated.csv'>interleaved_100_200_15d_25_cramped_rotated</option>
+                    <option value='../../static/data/satimage.csv'>satimage</option>
+                    <option value='../../static/data/movement_libras.csv'>movement_libras</option>
+                    <option value='../../static/data/n100-d10-c3-spr0.2-out0.csv'>n100-d10-c3-spr0.2-out0</option>
+                    <option value='../../static/data/wdbc_class_1_2_origClassLabels.csv'>wdbc_class_1_2_origClassLabels</option>
+                    <option value='../../static/data/n100-d5-c5-spr0.2-out0.csv'>n100-d5-c5-spr0.2-out0</option>   
+                    <option value='../../static/data/white_ballance_origClassLabels.csv'>white_ballance_origClassLabels</option>
+                    <option value='../../static/data/ms_interleaved_120_240_3d_50_centeredClusters.csv'>ms_interleaved_120_240_3d_50_centeredClusters</option>
+                    <option value='../../static/data/n500-d5-c5-spr0.2-out0.csv'>n500-d5-c5-spr0.2-out0</option>
+                 </select>
+
+                 <!-- my add begin -->
+
+                 <p style="position:relative;left:30px;top:10px">
+                    Visual separation metric
+                </p>
+                 <select class = "form-control " id = "selectMetric" 
+                        style = "position: relative;padding-top: 2px;padding-left: 2px;padding-bottom: 1px ;
+                                width:180px;height:25px; left:30px;top:0px; " >
+                    <option value="DSC">DSC</option>
+                    <option value="KNNG">KNNG</option>
+
+                 </select>
+
+                 <p style="position:relative;left:30px;top:10px">
+                    Partition based on
+                 </p>
+                 <select class = "form-control " id = "selectPalg"  onchange="onPartitionAlgChange()"
+                        style = "position: relative;padding-top: 2px;padding-left: 2px;padding-bottom: 1px ;
+                                width:180px;height:25px; left:30px;top:0px; " >
+                    <option value="BoundingBox">Bounding Box</option>
+                    <option value="MDS">MDS</option>
+
+                 </select>
+
+                 <p style="position:relative;left:30px;top:10px">
+                    Evaluation measure
+                 </p>
+                 <select class = "form-control " id = "selectEvaluation" 
+                        style = "position: relative;padding-top: 2px;padding-left: 2px;padding-bottom: 1px ;
+                                width:180px;height:25px; left:30px;top:0px; " >
+                    <option value="BoundingBox">GONG</option>
+                    <option value="MDS">Silhouette Coefficient</option>
+
+                 </select>
+
+                 <!-- my add end -->
+
+                 <!-- my add begin -->
+
+                 <div style="height: 40px">
+                    <p style="position:relative;left:30px;top:10px;width:80px">Threshold</p>
+                    <input class = "form-control "  value=0.95 onchange="onFileSelected()"
+                           style="font-size: 16px; 
+                           position: relative; top:-32px;left: 130px; width: 80px;height: 25px"
+                           id   = "Threshold"
+                           value = " "
+                           size = "2"
+                           type = "number" step="0.01" min="0" max="1"/>
+                 </div>
+
+                 <!-- my add end -->
+
+
+                <div style="height: 40px">
+                    <p style="position:relative;left:30px;top:10px;width:80px">Data size</p>
+                    <input class = "form-control "
+                           style="font-size: 16px;
+                           position: relative; top:-32px;left: 130px; width: 80px;height: 25px"
+                           id   = "DataSize"
+                           value = " "
+                           size = "2"
+                           type = "text"/>
+                </div>
+
+                <div style="height: 40px">
+                    <p style="position:relative;left:30px;top:10px;width:80px">Dimensions</p>
+                    <input class = "form-control "
+                           style="font-size: 16px;
+                           position: relative; top:-32px;left: 130px; width: 80px;height: 25px"
+                           id   = "Dimension"
+                           value = " "
+                           size = "2"
+                           type = "text"/>
+                </div>
+
+                <!--  my add begin -->
+
+                <div style="height: 40px">
+                    <p style="position:relative;left:30px;top:10px;width:80px">Class</p>
+                    <input class = "form-control "
+                           style="font-size: 16px;
+                           position: relative; top:-32px;left: 130px; width: 80px;height: 25px"
+                           id   = "DataClass"
+                           value = " "
+                           size = "2"
+                           type = "text"/>
+                </div>
+                
+                <!-- my add end -->
+
+                <div style="height: 40px">
+                    <button type="button" class="btn btn-default btn-sm "
+                                style="position: relative;
+                                left:130px;width:80px;height: 25px;top:10px;
+                                padding-left:8px;padding-top: 3px;
+                                font-size: 14px;
+                                background-color:#8E8E8E "
+                                onclick="onFileSelected()">Change
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div id="mainBody">
+            <p style="position:relative;left:10px;top:10px;font-family: 'Helvetica Neue';color:black;font-weight: bold;">
+                    投影对比实验
+            </p>
+
+            <div id = "viewBody">
+                <div class="plotsline">
+                     <div id = "pcaPlot" class = "plots">
+                        PCA
+
+                    </div>
+                    <div id = "mdsPlot" class = "plots">
+                        MDS
+
+                    </div>
+                    <div id = "ldaPlot" class = "plots">
+                        LDA
+
+                    </div>
+
+                    <div id = "isomapPlot" class = "plots">
+                        Isomap
+
+                    </div>
+
+                    <div id = "tsnePlot" class = "plots">
+                        t-SNE
+
+                    </div>
+
+                </div>
+                <div class="plotsline">
+                    <div id = "pLDA1Plot" class = "plots">
+                        pLDA1
+
+                    </div>
+                    <div id = "pLDA2Plot" class = "plots">
+                        pLDA2
+
+                    </div>
+                    <div id = "pLDA3Plot" class = "plots">
+                        pLDA3
+
+                    </div>
+
+                    <div id = "pLDA4Plot" class = "plots">
+                        pLDA4
+
+                    </div>
+
+                    <div id = "pLDA5Plot" class = "plots">
+                        pLDA5
+
+                    </div>
+
+                </div>
+
+                <!--  my add begin -->
+                
+                
+                <div class="plotsline">
+
+                     <!--  my add begin 
+                    <p style="position:relative;left:30px;top:10px;font-family: 'Helvetica Neue';color:black;font-weight: bold;">
+                    度量指标分析
+                    </p>
+                     my add end -->
+                     
+
+                    <div id = "infoPlot" class = "metricplots">
+                    
+                        <p style="position:relative;left:10px;top:10px;font-family: 'Helvetica Neue';color:black;font-weight: bold;">
+                        评估指标
+                        </p>
+
+                        <div id = "metricchart" class = "metricchart">
+
+                        </div>
+
+                    </div>
+                    
+                     
+                </div>
+                <!--  my add end -->
+                 
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
